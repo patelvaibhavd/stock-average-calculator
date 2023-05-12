@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Stock market Average Calculator</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="description"
+      content="This application makes it possible to calculate the average of the stocks by entering the first and second buying details. A stock average calculator is a tool used to calculate the average value of stock prices." />
+    <meta name="keywords"
+      content="Indian Stock market average Calculator, USA Stock Market average calculator, US stock market average calculator, Japan stock market average-calculator, Australia stock market average calculator. average calculator, stock calculator, percentage calculator,  cash and carry calculator, Stock prices, Average, Calculation, Performance, Investors, Time period, Investment decisions, Spreadsheet, Software program, Stock charting, Technical analysis, Analyzing, Comparison, Investment performance, Stock market.">
+    <meta name="author" content="Vaibhav Patel">
+    <meta property="og:title" content="Stock market Average Calculator" />
+    <meta property="og:url" content="https://patelvaibhavd.github.io/stock-average-calculator/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap-theme.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="bs-example">
+      <nav role="navigation" class="navbar navbar-default">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="javascript:void(0)" class="navbar-brand">
+            <img src="./images/logo.png" alt="LOGO" height="20" width="30">
+          </a>
+        </div>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse ">
+          <ul class="nav navbar-nav">
+            <li id="ac" class="active" onclick="activeSection('ac')"><a href="javascript:void(0)">Stock Average
+                Calculator</a></li>
+            <li id="sc" class="" onclick="activeSection('sc')"><a href="javascript:void(0)">SIP Calculator</a></li>
+            <li id="pc" class="" onclick="activeSection('pc')"><a href="javascript:void(0)">Percentage Calculator</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/patelvaibhavd/stock-average-calculator" target="_blank"><img
+                  src="./images/github-mark.png" alt="GITHUB" width="18" height="18"></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="thumbnail">
+                <div class="caption text-center">
+                  <div id="average-calculator">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <header>
+                          <h2 class="headers">Stock market average calculator</h2>
+                        </header>
+                        <hr />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 st">
+                        <h4>First Purchase</h3>
+                          <hr>
+                          <div>
+                            <label class="input-label">Units</label>
+                            <input class="form-control" type="number" id="units1" autocomplete="off"
+                              onchange="unitChanged('units1','error1')" />
+                            <span id='error1'></span>
+                          </div>
+                          <div class="mt-15">
+                            <label class="input-label">Price per share</label>
+                            <input class="form-control" type="number" id="Price1" autocomplete="off"
+                              onchange="unitChanged('Price1','error2')" />
+                            <span id='error2'></span>
+                          </div>
+                      </div>
+                      <div class="col-md-6 st">
+                        <h4>Second Purchase</h3>
+                          <hr>
+                          <div>
+                            <label class="input-label">Units</label>
+                            <input class="form-control" type="number" id="units2" autocomplete="off"
+                              onchange="unitChanged('units2','error3')" />
+                            <span id='error3'></span>
+                          </div>
+                          <div class="mt-15">
+                            <label class="input-label">Price per share</label>
+                            <input class="form-control" type="number" id="Price2" autocomplete="off"
+                              onchange="unitChanged('Price2','error4');getAverage()">
+                            <span id='error4'></span>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h5 id="investedamount1"></h5>
+                      </div>
+                      <div class="col-md-6">
+                        <h5 id="investedamount2"></h5>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 st">
+                        <h5 id="result"></h5>
+                      </div>
+                      <div class="col-md-12 st">
+                        <button class="btn btn-success" onclick="getAverage()"> Calculate Average</button>
+                        <button class="btn btn-danger" onclick="clearFields()">Clear Fields</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="sip-calculator" class="hide">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <header>
+                          <h2 class="headers">SIP(Systematic Investment Plan) calculator</h2>
+                        </header>
+                        <hr />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div id="sip-result-wrapper" class="col-md-12">
+                        <div>
+                          <label class="input-label">Monthly Investment Amount</label>
+                          <input class="form-control" type="number" id="investment" autocomplete="off"
+                            onchange="sipCalculator()" />
+                          <span id='error1'></span>
+                        </div>
+                        <div class="mt-15">
+                          <label class="input-label">Investment Period in years</label>
+                          <input class="form-control" type="number" id="years" autocomplete="off"
+                            onchange="sipCalculator()" />
+                          <span id='error2'></span>
+                        </div>
+                        <div class="mt-15">
+                          <label class="input-label">Expected Annual Returns(%)</label>
+                          <input class="form-control" type="number" id="rateOfInterest" autocomplete="off"
+                            onchange="sipCalculator()" />
+                          <span id='error2'></span>
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                      </div>
+                      <div class="col-md-12 banner-ad-desktop">
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="r-sip">
+                          <div class="results">Expected Amount : <span id="tm">0</span> </div>
+                          <div class="results"> Amount Invested : <span id="im">0</span></div>
+                          <div class="results">Total Gain : <span id="gm">0</span> </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 st footer-btn">
+                        <button class="btn btn-success" onclick="sipCalculator()"> Calculate</button>
+                        <button class="btn btn-danger" onclick="clearFields1()">Clear Fields</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="percentage-calculator" class="hide">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <header>
+                          <h2 class="headers">Percentage(%) calculator</h2>
+                        </header>
+                        <hr />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div id="percentage-result-wrapper" class="col-md-12">
+                        <div class="percentage-wrapper">
+                          <label class="input-label">What is </label>
+                          <input class="form-control percentage-input" type="number" id="percentage" autocomplete="off"
+                            onchange="checkPercentage()" />
+                        </div>
+                        <div class="percentage-wrapper">
+                          <label class="input-label">% (Percentage) of </label>
+                          <input class="form-control percentage-input" type="number" id="percentageNumber"
+                            autocomplete="off" onchange="checkPercentage()" />
+                          <label class="input-label">?</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12 col-xs-12">
+                        <div class="r-sip">
+                          <div class="results">Result : <span id="percentageResult">0</span> </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12 st footer-btn">
+                          <button class="btn btn-success"> Answer</button>
+                          <button class="btn btn-danger" onclick="clearPercentage()">Clear</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container">
+        2023 - Vaibhav Patel - <a href="mailto:patelvaibhav27@gmail.com">patelvaibhav27@gmail.com</a></div>
+    </footer>
+    <script src="./scripts/script.js" crossorigin="anonymous"></script>
+    <script src="./scripts/jquery-2.1.3.min.js" crossorigin="anonymous"></script>
+    <script src="./scripts/bootstrap.min.js"></script>
+  </body>
+</html>
